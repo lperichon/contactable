@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{Adds contact information to an active record model}
   s.email = %q{info@luisperichon.com.ar}
   s.extra_rdoc_files = ["LICENSE", "README.rdoc", "lib/contactable.rb"]
-  s.files = ["LICENSE", "Manifest", "README.rdoc", "Rakefile", "generators/contactable/USAGE", "generators/contactable/contactable_generator.rb", "lib/contactable.rb", "contactable.gemspec"]
+  s.files = ["LICENSE", "Manifest", "README.rdoc", "Rakefile", "contactable.gemspec", "generators/contactable/USAGE", "generators/contactable/contactable_generator.rb", "lib/contactable.rb"]
   s.homepage = %q{http://github.com/lperichon/contactable}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Contactable", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
