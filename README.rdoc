@@ -1,0 +1,2 @@
+= Contactable
+    A rails gem that adds contact information to an active record model
