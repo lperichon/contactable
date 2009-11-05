@@ -1,0 +1,8 @@
+Description:
+    Creates a migration that adds contactable fields to the given model
+
+Example:
+    ./script/generate contactable contact
+
+    This will create:
+        db/migrate/TIMESTAMP_add_contactable_fields_to_contact
