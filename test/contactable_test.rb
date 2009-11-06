@@ -13,6 +13,9 @@ def setup_db
       t.column :first_name, :string
       t.column :last_name, :string
     end
+    create_table :companies do |t|
+      t.column :name, :string
+    end
   end
 end
 
@@ -26,11 +29,16 @@ class Contact < ActiveRecord::Base
   contactable
 end
 
+class Company < ActiveRecord::Base
+  contactable
+end
+
 class ContactableTest < Test::Unit::TestCase
 
   def setup
     setup_db
     Contact.create! :first_name => "Bart", :last_name => "Simpson"
+    Company.create! :name => "The Leftorium"
   end
 
   def teardown
@@ -39,8 +47,16 @@ class ContactableTest < Test::Unit::TestCase
 
   def test_name
     contact = Contact.first
+    company = Company.first
 
     assert_equal 'Bart Simpson', contact.name
+    assert_equal 'The Leftorium', company.name
+  end
+
+  def test_initials
+    contact = Contact.first
+
+    assert_equal 'B.S.', contact.initials
   end
 
 end 

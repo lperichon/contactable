@@ -20,6 +20,7 @@ class ContactableGenerator < Rails::Generator::NamedBase
         assigns[:table_name] = custom_file_name
         assigns[:attributes] = []
         assigns[:attributes] << Rails::Generator::GeneratedAttribute.new("first_name", "string")
+        assigns[:attributes] << Rails::Generator::GeneratedAttribute.new("middle_name", "string")
         assigns[:attributes] << Rails::Generator::GeneratedAttribute.new("last_name", "string")
       end
     end

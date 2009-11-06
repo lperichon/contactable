@@ -18,9 +18,36 @@ module Contactable
       options = {}
       options.merge!(args.pop) if args.last.kind_of? Hash
 
+      # contactable#name() supports 2 options:
+      # If a name column exists that one is used
+      # If not use first, middle and last_name columns (only if available)
       class_eval <<-EOV
+        def name_part_columns
+          [:first_name, :middle_name, :last_name]
+        end
+
+        def name_parts
+          name_parts = []
+            name_part_columns.each do |name_part|
+              name_parts << self.send(name_part) if self.respond_to?(name_part)
+            end
+          name_parts
+        end
+
         def name
-          [self.first_name,self.last_name].join(' ')
+          if self[:name]
+            self[:name]
+          else
+            name_parts.join(' ')
+          end
+        end
+
+        def initials
+          if self[:name]
+            self[:name].tr('-', ' ').split(' ').map { |word| word.chars.first.upcase.to_s + '.'}.join
+          else
+            name_parts.map {|name_part| name_part.chars.first.upcase.to_s + '.'}.join
+          end
         end
       EOV
     end
