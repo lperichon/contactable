@@ -20,7 +20,7 @@ module Contactable
 
       class_eval <<-EOV
         def name
-          [self.first_name},self.last_name}].join(' ')
+          [self.first_name,self.last_name].join(' ')
         end
       EOV
     end
