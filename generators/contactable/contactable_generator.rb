@@ -22,6 +22,7 @@ class ContactableGenerator < Rails::Generator::NamedBase
         assigns[:attributes] << Rails::Generator::GeneratedAttribute.new("first_name", "string")
         assigns[:attributes] << Rails::Generator::GeneratedAttribute.new("middle_name", "string")
         assigns[:attributes] << Rails::Generator::GeneratedAttribute.new("last_name", "string")
+        assigns[:attributes] << Rails::Generator::GeneratedAttribute.new("birthday", "date")
       end
     end
 end

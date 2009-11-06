@@ -49,6 +49,13 @@ module Contactable
             name_parts.map {|name_part| name_part.chars.first.upcase.to_s + '.'}.join
           end
         end
+
+        def age
+          if self.respond_to?(:birthday)
+            now = Time.now.utc.to_date
+            now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0)
+          end
+        end
       EOV
     end
 

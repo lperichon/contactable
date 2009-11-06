@@ -1,6 +1,8 @@
 require 'test/unit'
 require 'rubygems'
 gem 'activerecord'
+gem 'timecop'
+require 'timecop'
 require 'active_record'
 
 require "#{File.dirname(__FILE__)}/../lib/contactable"
@@ -12,6 +14,7 @@ def setup_db
     create_table :contacts do |t|
       t.column :first_name, :string
       t.column :last_name, :string
+      t.column :birthday, :date
     end
     create_table :companies do |t|
       t.column :name, :string
@@ -37,7 +40,11 @@ class ContactableTest < Test::Unit::TestCase
 
   def setup
     setup_db
-    Contact.create! :first_name => "Bart", :last_name => "Simpson"
+
+    # Set Time.now to September 1, 2008 10:05:00 AM (at this instant), but allow it to move forward
+    t = Time.local(2009, 11, 6, 10, 5, 0)
+    Timecop.travel(t)    
+    Contact.create! :first_name => "Bart", :last_name => "Simpson", :birthday => Date.parse('3-3-1983')
     Company.create! :name => "The Leftorium"
   end
 
@@ -57,6 +64,12 @@ class ContactableTest < Test::Unit::TestCase
     contact = Contact.first
 
     assert_equal 'B.S.', contact.initials
+  end
+
+  def test_age
+    contact = Contact.first
+
+    assert_equal 26, contact.age
   end
 
 end 
