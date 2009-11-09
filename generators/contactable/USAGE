@@ -2,7 +2,9 @@ Description:
     Creates a migration that adds contactable fields to the given model
 
 Example:
-    ./script/generate contactable contact
+    ./script/generate contactable contact [--skip_related]
 
     This will create:
-        db/migrate/TIMESTAMP_add_contactable_fields_to_contact
+        db/migrate/TIMESTAMP_create_contactable_related_tables.rb
+        app/models/...
+        db/migrate/TIMESTAMP_add_contactable_fields_to_contact.rb

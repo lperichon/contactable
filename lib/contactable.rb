@@ -18,9 +18,6 @@ module Contactable
       options = {}
       options.merge!(args.pop) if args.last.kind_of? Hash
 
-      # contactable#name() supports 2 options:
-      # If a name column exists that one is used
-      # If not use first, middle and last_name columns (only if available)
       class_eval <<-EOV
         def name_part_columns
           [:first_name, :middle_name, :last_name]
@@ -34,6 +31,9 @@ module Contactable
           name_parts
         end
 
+        # contactable#name() supports 2 options:
+        # If a name column exists that one is used
+        # If not use first, middle and last_name columns (only if available)
         def name
           if self[:name]
             self[:name]
@@ -56,6 +56,23 @@ module Contactable
             now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0)
           end
         end
+
+        has_many                      :addresses,           :as => :owner
+        has_many                      :emails,              :as => :owner
+        has_many                      :instant_messengers,  :as => :owner
+        has_many                      :phones,              :as => :owner
+        has_many                      :websites,            :as => :owner
+
+        accepts_nested_attributes_for :addresses,
+          :reject_if => proc { |attributes| attributes['address'].blank? }
+        accepts_nested_attributes_for :emails,
+          :reject_if => proc { |attributes| attributes['address'].blank? }
+        accepts_nested_attributes_for :instant_messengers,
+          :reject_if => proc { |attributes| attributes['nick'].blank? }
+        accepts_nested_attributes_for :phones,
+          :reject_if => proc { |attributes| attributes['number'].blank? }
+        accepts_nested_attributes_for :websites,
+          :reject_if => proc { |attributes| attributes['address'].blank? }
       EOV
     end
 

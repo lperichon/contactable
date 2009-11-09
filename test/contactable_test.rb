@@ -19,6 +19,11 @@ def setup_db
     create_table :companies do |t|
       t.column :name, :string
     end
+    create_table :email_addresses do |t|
+      t.column :contactable_id, :integer
+      t.column :contactable_type, :string
+      t.column :address, :string
+    end
   end
 end
 
@@ -36,6 +41,11 @@ class Company < ActiveRecord::Base
   contactable
 end
 
+class EmailAddress < ActiveRecord::Base
+  belongs_to :contactable, :polymorphic => true
+  validates_presence_of :contactable, :address
+end
+
 class ContactableTest < Test::Unit::TestCase
 
   def setup
@@ -44,8 +54,8 @@ class ContactableTest < Test::Unit::TestCase
     # Set Time.now to September 1, 2008 10:05:00 AM (at this instant), but allow it to move forward
     t = Time.local(2009, 11, 6, 10, 5, 0)
     Timecop.travel(t)    
-    Contact.create! :first_name => "Bart", :last_name => "Simpson", :birthday => Date.parse('3-3-1983')
-    Company.create! :name => "The Leftorium"
+    @contact = Contact.create! :first_name => "Bart", :last_name => "Simpson", :birthday => Date.parse('3-3-1983')
+    @company = Company.create! :name => "The Leftorium"
   end
 
   def teardown
@@ -53,23 +63,22 @@ class ContactableTest < Test::Unit::TestCase
   end
 
   def test_name
-    contact = Contact.first
-    company = Company.first
-
-    assert_equal 'Bart Simpson', contact.name
-    assert_equal 'The Leftorium', company.name
+    assert_equal 'Bart Simpson', @contact.name
+    assert_equal 'The Leftorium', @company.name
   end
 
   def test_initials
-    contact = Contact.first
-
-    assert_equal 'B.S.', contact.initials
+    assert_equal 'B.S.', @contact.initials
   end
 
   def test_age
-    contact = Contact.first
+    assert_equal 26, @contact.age
+  end
 
-    assert_equal 26, contact.age
+  def test_email_addresses
+    assert @contact.email_addresses.empty?
+
+    contact_with_email = Contact.create!(:first_name => 'Homer', :last_name => "Simpson", :email_addresses_attributes => [{:address => 'homer@simpsons.com'}] )
   end
 
 end 

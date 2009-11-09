@@ -1,6 +1,19 @@
 class ContactableGenerator < Rails::Generator::NamedBase
+  default_options :skip_related => false
+
   def manifest
     record do |m|
+      unless options[:skip_related]
+        # migration
+        m.file 'migrations/create_contactable_related_tables.rb', "db/migrate/#{Time.now.strftime('%Y%m%d%H%M%S')}_create_contactable_related_tables.rb"
+
+        # models
+        %w( address address_type phone phone_type instant_messenger
+          instant_messenger_type instant_messenger_protocol website website_type
+          email email_type country province city ).each do |model|
+          m.file "models/#{model}.rb", "app/models/#{model}.rb"
+        end
+      end
       m.migration_template 'migration:migration.rb', "db/migrate", {:assigns => contactable_local_assigns,
         :migration_file_name => "add_contactable_fields_to_#{custom_file_name}"
        }
