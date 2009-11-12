@@ -1,6 +1,10 @@
 class ContactableGenerator < Rails::Generator::NamedBase
   default_options :skip_related => false
 
+  def add_options!(opt)
+    opt.on('-sr', '--skip_related') { |value| options[:skip_related] = value }
+  end
+
   def manifest
     record do |m|
       unless options[:skip_related]
