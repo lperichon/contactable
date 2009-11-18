@@ -64,15 +64,15 @@ module Contactable
         has_many                      :websites,            :as => :owner
 
         accepts_nested_attributes_for :addresses,
-          :reject_if => proc { |attributes| attributes['address'].blank? }
+          :reject_if => proc { |attributes| attributes['address'].blank? }, :allow_destroy => true
         accepts_nested_attributes_for :emails,
-          :reject_if => proc { |attributes| attributes['address'].blank? }
+          :reject_if => proc { |attributes| attributes['address'].blank? }, :allow_destroy => true
         accepts_nested_attributes_for :instant_messengers,
-          :reject_if => proc { |attributes| attributes['nick'].blank? }
+          :reject_if => proc { |attributes| attributes['nick'].blank? }, :allow_destroy => true
         accepts_nested_attributes_for :phones,
-          :reject_if => proc { |attributes| attributes['number'].blank? }
+          :reject_if => proc { |attributes| attributes['number'].blank? }, :allow_destroy => true
         accepts_nested_attributes_for :websites,
-          :reject_if => proc { |attributes| attributes['address'].blank? }
+          :reject_if => proc { |attributes| attributes['address'].blank? }, :allow_destroy => true
       EOV
     end
 

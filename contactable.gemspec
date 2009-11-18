@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Luis Perichon"]
-  s.date = %q{2009-11-12}
+  s.date = %q{2009-11-18}
   s.description = %q{Adds contact information to an active record model}
   s.email = %q{info@luisperichon.com.ar}
   s.extra_rdoc_files = ["LICENSE", "README.rdoc", "lib/contactable.rb"]
