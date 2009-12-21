@@ -51,7 +51,7 @@ module Contactable
         end
 
         def age
-          if self.respond_to?(:birthday)
+          if self.respond_to?(:birthday) && !self.birthday.nil?
             now = Time.now.utc.to_date
             now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0)
           end
