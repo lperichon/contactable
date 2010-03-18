@@ -9,9 +9,9 @@ class Address < ActiveRecord::Base
   belongs_to :division3, :class_name => 'Division'
   belongs_to :division4, :class_name => 'Division'
 
-  acts_as_mappable :default_units => :kms
+  #acts_as_mappable :default_units => :kms
   before_save :cleanup_address
-  before_validation :geocode_address
+  #before_validation :geocode_address
 
   def full_address
     returning address_str = "" do
@@ -61,11 +61,12 @@ class Address < ActiveRecord::Base
 
   private
 
-  def geocode_address
-    geo=Geokit::Geocoders::MultiGeocoder.geocode(self.full_address)
-    errors.add(:address, I18n.t('address.geocode_error')) if !geo.success
-    self.lat, self.lng = geo.lat,geo.lng if geo.success
-  end
+#
+#  def geocode_address
+#    geo=Geokit::Geocoders::MultiGeocoder.geocode(self.full_address)
+#    errors.add(:address, I18n.t('address.geocode_error')) if !geo.success
+#    self.lat, self.lng = geo.lat,geo.lng if geo.success
+#  end
 
   def cleanup_address
     (2..4).to_a.reverse.each do |idx|
