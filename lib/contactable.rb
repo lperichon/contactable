@@ -62,6 +62,7 @@ module Contactable
         has_many                      :instant_messengers,  :as => :owner
         has_many                      :phones,              :as => :owner
         has_many                      :websites,            :as => :owner
+        has_many                      :identifications,     :as => :owner
 
         accepts_nested_attributes_for :addresses,
           :reject_if => proc { |attributes| attributes['address'].blank? }, :allow_destroy => true
@@ -72,6 +73,8 @@ module Contactable
         accepts_nested_attributes_for :phones,
           :reject_if => proc { |attributes| attributes['number'].blank? }, :allow_destroy => true
         accepts_nested_attributes_for :websites,
+          :reject_if => proc { |attributes| attributes['address'].blank? }, :allow_destroy => true
+        accepts_nested_attributes_for :identifications,
           :reject_if => proc { |attributes| attributes['address'].blank? }, :allow_destroy => true
       EOV
     end
