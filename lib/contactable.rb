@@ -78,10 +78,11 @@ module Contactable
           :reject_if => proc { |attributes| attributes['address'].blank? }, :allow_destroy => true
       EOV
     end
-
   end
 end
 
 class ActiveRecord::Base
   include Contactable
 end
+
+require 'contactable/extensions/routes'

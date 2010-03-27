@@ -1,0 +1,12 @@
+
+*******************************************************************************
+
+You're almost done! Don't forget to add contactable routes to your model.
+
+for example:
+
+map.resources :contacts do |contact|
+  contact.contactable_resources
+end
+
+*******************************************************************************

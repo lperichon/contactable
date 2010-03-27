@@ -213,15 +213,23 @@ class CreateContactableRelatedTables < ActiveRecord::Migration
   def self.down
     drop_table :addresses
     drop_table :emails
+    drop_table :identifications
     drop_table :instant_messengers
     drop_table :phones
     drop_table :websites
     drop_table :address_types
+    drop_table :address_type_translations
     drop_table :email_types
+    drop_table :email_type
     drop_table :instant_messenger_protocols
     drop_table :instant_messenger_types
+    drop_table :instant_messenger_type_translations
     drop_table :phone_types
+    drop_table :phone_type_translations
     drop_table :website_types
+    drop_table :website_type_translations
+    drop_table :identification_types
+    drop_table :identification_type_translations
      %w(countries divisions cities).each { |t| drop_table t }
   end
 end

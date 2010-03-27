@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('contactable', '0.1.0') do |p|
+Echoe.new('contactable', '1.0') do |p|
   p.description     = "Adds contact information to an active record model"
   p.url             = "http://github.com/lperichon/contactable"
   p.author          = "Luis Perichon"
