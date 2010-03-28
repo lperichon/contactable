@@ -7,7 +7,16 @@ To install the Formtastic gem run:
   sudo gem install contactable
 
 And add it to your environment.rb configuration as a gem dependency:
+  config.gem 'contactable'
 
-  config.gem 'formtastic'
+Now you can use it in your existing models by running:
+  ./script/generate contactable contact
 
-Optionally, run ./script/generate contactable_views formtastic
+Remember you need to add the new contactable routes:
+  map.resources :contacts do |contact|
+    contact.contactable_resources
+  end
+
+Optionally, run
+  ./script/generate contactable_views formtastic
+
