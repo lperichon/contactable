@@ -17,6 +17,12 @@ Remember you need to add the new contactable routes:
     contact.contactable_resources
   end
 
+You can now use the default contactable partial in your show view
+  <%= render :partial => 'contactable/contactable', :locals => {:contactable => @contact} %>
+
+And in your formtastic form
+  <%= render :partial => 'contactable/fields', :locals => {:f => f}
+
 Optionally, run
   ./script/generate contactable_views formtastic
 
