@@ -2,11 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + "/lib/insert_commands.rb")
 
 class ContactableGenerator < Rails::Generator::NamedBase
 
-  def add_options!(opt)
-    #opt.on('-sr', '--skip_related') { |value| options[:skip_related] = value }
-    # TODO: add option for views
-  end
-
   def manifest
     record do |m|
       # migration for related tables if not there already
@@ -20,12 +15,13 @@ class ContactableGenerator < Rails::Generator::NamedBase
         :migration_file_name => "add_contactable_fields_to_#{custom_file_name}"
       }
 
-      # contactable views
-      # TODO: copy views
-
       # contactable model
       contactable_model_file_path = "app/models/#{custom_file_name.singularize}.rb"
       m.insert_into(contactable_model_file_path, 'contactable')
+
+      # contactable controller
+      contactable_controller_file_path = "app/models/#{custom_file_name}_controller.rb"
+      m.insert_into(contactable_model_file_path, "helper ContactableHelper")
 
       m.readme "README"
     end

@@ -1,2 +1,13 @@
 = Contactable
     A rails gem that adds contact information to an active record model
+
+== Installation
+
+    To install the Formtastic gem run:
+    sudo gem install contactable
+
+    And add it to your environment.rb configuration as a gem dependency:
+
+    config.gem 'formtastic'
+
+    Optionally, run ./script/generate contactable_views formtastic

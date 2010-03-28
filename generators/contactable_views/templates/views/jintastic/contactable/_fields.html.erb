@@ -15,7 +15,7 @@
 <div id='addresses' class='multi addresses'>
   <%= f.label :addresses, 'Addresses' %>
   <% f.inputs :for => :addresses do |af|%>
-    <%= render :partial => 'addresses/address', :locals => {:address => af.object, :f => af} %>
+    <%= render :partial => 'addresses/address', :locals => {:f => af} %>
     <%= remove_link_unless_new_record(af) %>
   <% end %>
 </div>
